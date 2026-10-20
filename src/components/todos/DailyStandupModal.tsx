@@ -50,7 +50,7 @@ ${
 📊 *Productivity Velocity*: ${
     todos.length === 0 ? '0%' : Math.round((completed.length / todos.length) * 100) + '%'
   } completed
-Generated via TaskFlow Industrial Suite.`;
+Generated via FokusTask Industrial Suite.`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(standupText);

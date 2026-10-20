@@ -163,7 +163,7 @@ export default function HomePage() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold tracking-tight">ZhafTask</h1>
+                <h1 className="text-xl font-bold tracking-tight">FokusTask</h1>
                 <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                   v2.0
                 </span>

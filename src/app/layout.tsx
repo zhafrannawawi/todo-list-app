@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ZhafTask — Modern To-Do & Deep Work Suite",
+  title: "FokusTask — Modern Industrial Task & Focus Suite",
   description: "Next.js, Tailwind CSS & Supabase To-Do List application",
 };
 
