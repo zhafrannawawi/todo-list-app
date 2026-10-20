@@ -10,6 +10,7 @@ import { TodoItem } from '@/components/todos/TodoItem';
 import { EisenhowerMatrix } from '@/components/todos/EisenhowerMatrix';
 import { PomodoroModal } from '@/components/todos/PomodoroModal';
 import { DailyStandupModal } from '@/components/todos/DailyStandupModal';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { CheckSquare, Loader2, RefreshCw } from 'lucide-react';
 
 export default function HomePage() {
@@ -152,30 +153,39 @@ export default function HomePage() {
   }, [todos, statusFilter, priorityFilter, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-zinc-50/50 dark:bg-black text-zinc-900 dark:text-zinc-100 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 py-10 px-4 sm:px-6 lg:px-8 transition-colors">
       <main className="max-w-3xl mx-auto">
         {/* Header */}
-        <header className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-200/80 dark:border-zinc-800/80">
+        <header className="flex items-center justify-between mb-8 pb-4 border-b border-slate-200 dark:border-zinc-800">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm">
               <CheckSquare className="w-5 h-5 stroke-[2.5]" />
             </div>
             <div>
-              <h1 className="text-xl font-bold tracking-tight">TaskFlow Pro</h1>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Next.js &bull; Tailwind &bull; Supabase &bull; Industrial Productivity Suite
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-bold tracking-tight">ZhafTask</h1>
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                  v2.0
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 dark:text-zinc-400">
+                Industrial Deep Work &amp; Task Execution Suite
               </p>
             </div>
           </div>
 
-          <button
-            onClick={() => fetchTodos(true)}
-            disabled={isRefreshing || isLoading}
-            title="Muat ulang data"
-            className="p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all disabled:opacity-50"
-          >
-            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-          </button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+
+            <button
+              onClick={() => fetchTodos(true)}
+              disabled={isRefreshing || isLoading}
+              title="Muat ulang data"
+              className="p-2 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-100 dark:hover:bg-zinc-800 transition-all disabled:opacity-50 shadow-xs"
+            >
+              <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+            </button>
+          </div>
         </header>
 
         {/* Stats & Gamification */}
@@ -204,7 +214,7 @@ export default function HomePage() {
 
         {/* Content View */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-16 gap-3 text-zinc-400">
+          <div className="flex flex-col items-center justify-center py-16 gap-3 text-slate-400 dark:text-zinc-500">
             <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
             <span className="text-xs">Sinkronisasi data dengan Supabase...</span>
           </div>
@@ -216,13 +226,13 @@ export default function HomePage() {
             onSelectFocus={(t) => setFocusTodo(t)}
           />
         ) : filteredTodos.length === 0 ? (
-          <div className="text-center py-16 border border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl bg-white/50 dark:bg-zinc-900/50">
-            <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+          <div className="text-center py-16 border border-dashed border-slate-200 dark:border-zinc-800 rounded-2xl bg-white/50 dark:bg-zinc-900/50">
+            <p className="text-sm font-medium text-slate-600 dark:text-zinc-400">
               {todos.length === 0
                 ? 'Belum ada tugas tersimpan'
                 : 'Tidak ada tugas yang sesuai filter'}
             </p>
-            <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">
+            <p className="text-xs text-slate-400 dark:text-zinc-500 mt-1">
               {todos.length === 0
                 ? 'Ketik di form di atas untuk membuat tugas baru.'
                 : 'Coba ubah kata kunci pencarian atau status filter.'}
