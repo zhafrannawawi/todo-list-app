@@ -205,7 +205,7 @@ export default function HomePage() {
             </p>
           </div>
         ) : (
-          <div className="flex flex-col gap-2">
+          <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 divide-y divide-zinc-100 dark:divide-zinc-800/60 overflow-hidden shadow-2xs">
             {filteredTodos.map((todo) => (
               <TodoItem
                 key={todo.id}

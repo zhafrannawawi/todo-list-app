@@ -13,8 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FokusTask — Modern Industrial Task & Focus Suite",
-  description: "Next.js, Tailwind CSS & Supabase To-Do List application",
+  title: "FokusTask — Industrial Task & Focus Suite",
+  description: "High-density Next.js, Tailwind CSS & Supabase To-Do & Deep Work tool",
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -25,6 +31,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico" sizes="32x32" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

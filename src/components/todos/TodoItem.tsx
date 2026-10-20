@@ -7,7 +7,6 @@ import {
   Check,
   Trash2,
   Calendar,
-  Clock,
   ChevronDown,
   ChevronRight,
   Plus,
@@ -55,20 +54,20 @@ export const TodoItem: React.FC<TodoItemProps> = ({
 
   return (
     <div
-      className={`group relative flex flex-col p-3 rounded-xl border transition-all duration-150 ${
+      className={`group relative flex flex-col p-3 transition-colors duration-150 animate-fade-in ${
         todo.is_completed
-          ? 'bg-zinc-50/60 dark:bg-zinc-900/30 border-zinc-200/60 dark:border-zinc-800/60 opacity-65'
-          : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-2xs'
+          ? 'bg-zinc-50/40 dark:bg-zinc-900/20 opacity-60'
+          : 'bg-white dark:bg-zinc-900/60 hover:bg-zinc-50/80 dark:hover:bg-zinc-800/40'
       }`}
     >
       <div className="flex items-start gap-3">
-        {/* Checkbox */}
+        {/* Checkbox with tactile spring pop */}
         <button
           type="button"
           onClick={() => onToggle(todo.id, todo.is_completed)}
-          className={`mt-0.5 flex-shrink-0 w-4.5 h-4.5 rounded border flex items-center justify-center transition-colors ${
+          className={`mt-0.5 flex-shrink-0 w-4.5 h-4.5 rounded border flex items-center justify-center transition-all ${
             todo.is_completed
-              ? 'bg-zinc-900 dark:bg-zinc-100 border-zinc-900 dark:border-zinc-100 text-white dark:text-zinc-900'
+              ? 'bg-zinc-900 dark:bg-zinc-100 border-zinc-900 dark:border-zinc-100 text-white dark:text-zinc-900 animate-check'
               : 'border-zinc-300 dark:border-zinc-600 hover:border-zinc-500'
           }`}
           aria-label={todo.is_completed ? 'Tandai belum selesai' : 'Tandai selesai'}
@@ -80,7 +79,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span
-              className={`text-sm font-medium tracking-tight break-words ${
+              className={`text-sm font-medium tracking-tight break-words transition-all duration-150 ${
                 todo.is_completed
                   ? 'line-through text-zinc-400 dark:text-zinc-500'
                   : 'text-zinc-900 dark:text-zinc-100'
@@ -122,12 +121,12 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             <button
               type="button"
               onClick={() => setShowSubtasks(!showSubtasks)}
-              className="inline-flex items-center gap-1 text-[11px] text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
+              className="inline-flex items-center gap-1 text-[11px] text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
             >
               {showSubtasks ? (
-                <ChevronDown className="w-3 h-3" />
+                <ChevronDown className="w-3 h-3 transition-transform" />
               ) : (
-                <ChevronRight className="w-3 h-3" />
+                <ChevronRight className="w-3 h-3 transition-transform" />
               )}
               <span>
                 {subtasks.length > 0
@@ -141,7 +140,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               <button
                 type="button"
                 onClick={() => onStartFocus(todo)}
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                 title="Mulai sesi fokus"
               >
                 <Play className="w-2.5 h-2.5 fill-current" />
@@ -156,11 +155,11 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           </div>
         </div>
 
-        {/* Delete */}
+        {/* Delete button (hover reveal) */}
         <button
           type="button"
           onClick={() => onDelete(todo.id)}
-          className="opacity-0 group-hover:opacity-100 focus:opacity-100 p-1 rounded text-zinc-400 hover:text-rose-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all"
+          className="opacity-0 group-hover:opacity-100 focus:opacity-100 p-1 rounded text-zinc-400 hover:text-rose-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-150"
           title="Hapus"
         >
           <Trash2 className="w-3.5 h-3.5" />
@@ -169,11 +168,11 @@ export const TodoItem: React.FC<TodoItemProps> = ({
 
       {/* Subtasks drawer */}
       {showSubtasks && (
-        <div className="mt-2.5 pl-7 pt-2 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col gap-1.5">
+        <div className="mt-2.5 pl-7 pt-2 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col gap-1.5 animate-slide-down">
           {subtasks.map((st) => (
             <div
               key={st.id}
-              className="group/st flex items-center justify-between gap-2 text-xs py-1 px-1.5 rounded hover:bg-zinc-50 dark:hover:bg-zinc-800/40"
+              className="group/st flex items-center justify-between gap-2 text-xs py-1 px-1.5 rounded hover:bg-zinc-100/50 dark:hover:bg-zinc-800/40 transition-colors"
             >
               <label className="flex items-center gap-2 cursor-pointer flex-1 min-w-0">
                 <input
@@ -196,7 +195,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               <button
                 type="button"
                 onClick={() => onDeleteSubtask(todo, st.id)}
-                className="opacity-0 group-hover/st:opacity-100 text-zinc-400 hover:text-rose-500"
+                className="opacity-0 group-hover/st:opacity-100 text-zinc-400 hover:text-rose-500 transition-opacity"
               >
                 <Trash2 className="w-3 h-3" />
               </button>
@@ -204,7 +203,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           ))}
 
           {isAddingSubtask ? (
-            <form onSubmit={handleAddSubtaskSubmit} className="flex gap-1.5 mt-1">
+            <form onSubmit={handleAddSubtaskSubmit} className="flex gap-1.5 mt-1 animate-fade-in">
               <input
                 type="text"
                 autoFocus
