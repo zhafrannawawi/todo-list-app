@@ -6,36 +6,33 @@ interface BadgeProps {
   className?: string;
 }
 
-const colorMap: Record<Priority, { bg: string; text: string; border: string; label: string }> = {
+const config: Record<Priority, { dot: string; text: string; label: string }> = {
   low: {
-    bg: 'bg-emerald-500/10 dark:bg-emerald-500/20',
-    text: 'text-emerald-700 dark:text-emerald-400',
-    border: 'border-emerald-500/20 dark:border-emerald-500/30',
+    dot: 'bg-zinc-400 dark:bg-zinc-500',
+    text: 'text-zinc-600 dark:text-zinc-400',
     label: 'Low',
   },
   medium: {
-    bg: 'bg-amber-500/10 dark:bg-amber-500/20',
-    text: 'text-amber-700 dark:text-amber-400',
-    border: 'border-amber-500/20 dark:border-amber-500/30',
+    dot: 'bg-blue-500 dark:bg-blue-400',
+    text: 'text-blue-700 dark:text-blue-300',
     label: 'Medium',
   },
   high: {
-    bg: 'bg-rose-500/10 dark:bg-rose-500/20',
-    text: 'text-rose-700 dark:text-rose-400',
-    border: 'border-rose-500/20 dark:border-rose-500/30',
+    dot: 'bg-rose-500 dark:bg-rose-400',
+    text: 'text-rose-700 dark:text-rose-300',
     label: 'High',
   },
 };
 
 export const PriorityBadge: React.FC<BadgeProps> = ({ priority, className = '' }) => {
-  const conf = colorMap[priority] || colorMap.medium;
+  const conf = config[priority] || config.medium;
 
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${conf.bg} ${conf.text} ${conf.border} ${className}`}
+      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 ${conf.text} ${className}`}
     >
-      <span className="w-1.5 h-1.5 mr-1.5 rounded-full bg-current opacity-70" />
-      {conf.label}
+      <span className={`w-1.5 h-1.5 rounded-full ${conf.dot}`} />
+      <span>{conf.label}</span>
     </span>
   );
 };
